@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import {PropsProduct} from '../Product';
 import Product from "../Product/Product.tsx";
-import ListTopSales from "./ListTopSales.tsx";
-
+import { getTopSales } from "../../api/methods.tsx";
 
 const Besselers = () => {
   const [isLoading, setLoading] = useState(false);
@@ -11,19 +10,16 @@ const Besselers = () => {
 
   useEffect(() => {
     setLoading(true);
-      getData();
-  }, []);
-
-  async function getData() {
-    const request = await fetch('http://localhost:7070/api/top-sales');
-    if (request.ok) {
-        const data = await request.json();
-        if (data.length === 0) setShowComponent(false);
-        setLoading(false);
-        setList(data);
+    
+    const data = async () => {
+      const cards = await getTopSales();
+      if (cards.length === 0) setShowComponent(false)
+      setList(cards);
+      setLoading(false);
     }
-  }
-
+    
+    data();
+  }, []);
 
   return (
     showComponent ? 
@@ -38,7 +34,5 @@ const Besselers = () => {
     ) : ''
   )
 }
-
-
 
 export default Besselers;

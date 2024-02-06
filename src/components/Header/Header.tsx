@@ -1,5 +1,5 @@
 import headerLogo from '../../img/header-logo.png';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
     return (
@@ -7,9 +7,9 @@ const Header = () => {
         <div className="row">
           <div className="col">
             <nav className="navbar navbar-expand-sm navbar-light bg-light">
-              <a className="navbar-brand" href="/">
+              <Link className="navbar-brand" to="/">
               <img src={headerLogo} alt="Bosa Noga"/>
-              </a>
+              </Link>
               <div className="collapse navbar-collapse" id="navbarMain">
                 <ul className="navbar-nav mr-auto">
                   <li className="nav-item">

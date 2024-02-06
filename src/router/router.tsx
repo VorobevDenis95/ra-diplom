@@ -1,18 +1,18 @@
 import {
   createBrowserRouter,
-} from 'react-router-dom'
-import Root from '../components/Root/Root'
-import ErrorPage from '../components/ErrorPage/ErrorPage'
-import Contacts from '../components/Contacts/Contacts'
+} from 'react-router-dom';
+import Root from '../components/Root/Root';
+import Contacts from '../components/Contacts/Contacts';
 import About from '../components/About/About';
 import { FullErrorPage } from '../components/HOC/FullErrorPage';
 import Besselers from '../components/Bestsellers/Bestsellers';
+import AboutCard from '../components/CardProduct/AboutCard';
 
 export const router = createBrowserRouter([
     {
       path: '/',
       element: <Root />,
-      errorElement: <FullErrorPage />,
+      // errorElement: <FullErrorPage />,
       children: [
         {
           path: '/',
@@ -30,6 +30,10 @@ export const router = createBrowserRouter([
           path: '/contacts',
           element: <Contacts/>,
         },
+        {
+          path: '/products/:id',
+          element: <AboutCard />
+        }
       ]
     }
 ])
