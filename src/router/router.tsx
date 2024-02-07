@@ -8,6 +8,7 @@ import { FullErrorPage } from '../components/HOC/FullErrorPage';
 import Besselers from '../components/Bestsellers/Bestsellers';
 import AboutCard from '../components/CardProduct/AboutCard';
 
+
 export const router = createBrowserRouter([
     {
       path: '/',
@@ -20,7 +21,7 @@ export const router = createBrowserRouter([
         },
         {
           path: '/catalog',
-          element: <div>Каталог</div>
+          element: <div>12</div>
         },
         {
           path: '/about',
