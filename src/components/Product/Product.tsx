@@ -1,13 +1,11 @@
 import {Link} from 'react-router-dom';
 
 export interface PropsProduct {
-  item: {
-    id: number;
-    category: string;
-    title: string;
-    price: number;
-    images: string[];
-  }
+  id: number;
+  category: string;
+  title: string;
+  price: number;
+  images: string[];
 }
 
 const Product = ({item} : PropsProduct) => {
@@ -18,12 +16,11 @@ const Product = ({item} : PropsProduct) => {
         className="card-img-top img-fluid" alt={item.title}/>
       <div className="card-body">
         <p className="card-text">{item.title}</p>
-        <p className="card-text">{`${item.title} руб.`}</p>
+        <p className="card-text">{`${item.price} руб.`}</p>
         <Link to={`/products/${item.id}`} className="btn btn-outline-primary">Заказать</Link>
       </div>
     </div>
     </div> 
-    
     )
 }
 

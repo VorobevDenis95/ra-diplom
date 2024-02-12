@@ -1,7 +1,12 @@
 import headerLogo from '../../img/header-logo.png';
 import { Link, NavLink } from 'react-router-dom';
+import SearchWidget from '../SearchWidget/SearchWidget';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+
+  const {cards} = useSelector(state => state.cart)
+
     return (
         <header className="container">
         <div className="row">
@@ -27,12 +32,12 @@ const Header = () => {
                 </ul>
                 <div>
                   <div className="header-controls-pics">
-                    <div data-id="search-expander" className="header-controls-pic header-controls-search"></div>
-                    
-                    <div className="header-controls-pic header-controls-cart">
-                      <div className="header-controls-cart-full">1</div>
+                    <SearchWidget />
+                                        
+                    <Link to={'/cart'} className="header-controls-pic header-controls-cart">
+                      {cards.length !== 0 && <div className="header-controls-cart-full">{cards.length}</div>}
                       <div className="header-controls-cart-menu"></div>
-                    </div>
+                    </Link>
                   </div>
                   <form data-id="search-form" className="header-controls-search-form form-inline invisible">
                     <input className="form-control" placeholder="Поиск"/>

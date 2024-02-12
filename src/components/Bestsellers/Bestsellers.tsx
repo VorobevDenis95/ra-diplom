@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import {PropsProduct} from '../Product';
+import { useEffect } from "react";
+import { PropsProduct } from "../Product/Product.tsx";
 import Product from "../Product/Product.tsx";
-import { getTopSales } from "../../api/methods.tsx";
 import {useDispatch, useSelector} from 'react-redux';
 import { fetchTopSales } from "../../redux/slice/topSalesSlice.tsx";
 import Preloader from "../Preloader/Preloader.tsx";
@@ -18,7 +17,7 @@ const Besselers = () => {
 
   useEffect(() => {
     dispath(fetchTopSales())
-  }, []);
+  }, [dispath]);
   
   
   return (
@@ -28,7 +27,7 @@ const Besselers = () => {
         {status === 'loading' && <Preloader />}
         {error && <h2>{error}</h2>}
         <div className="row">
-        {cards.map(el => (
+        {cards.map((el: PropsProduct) => (
           <Product key={el.id} item={el}/>))}
         </div>
        </section>

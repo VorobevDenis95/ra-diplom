@@ -42,6 +42,6 @@ const topSales = createSlice({
     }
 });
 
-export const {} = topSales.actions;
+// export const {} = topSales.actions;
 
 export default topSales.reducer;

@@ -7,6 +7,12 @@ import About from '../components/About/About';
 import { FullErrorPage } from '../components/HOC/FullErrorPage';
 import Besselers from '../components/Bestsellers/Bestsellers';
 import AboutCard from '../components/CardProduct/AboutCard';
+import Catalog from '../components/Catalog/Catalog';
+import Categories from '../components/Categories/Categories';
+import Main from '../components/Main/Main';
+import { CatalogWithSearch } from '../components/Catalog/CatalogWithSearch';
+import Search from '../components/Search/Search';
+import Cart from '../components/Cart/Cart';
 
 
 export const router = createBrowserRouter([
@@ -17,11 +23,11 @@ export const router = createBrowserRouter([
       children: [
         {
           path: '/',
-          element: <Besselers/>
+          element: <Main/>
         },
         {
           path: '/catalog',
-          element: <div>12</div>
+          element: <CatalogWithSearch/>
         },
         {
           path: '/about',
@@ -34,6 +40,10 @@ export const router = createBrowserRouter([
         {
           path: '/products/:id',
           element: <AboutCard />
+        },
+        {
+          path: '/cart',
+          element: <Cart/>
         }
       ]
     }

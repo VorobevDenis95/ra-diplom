@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="container bg-light footer">
-      <div className="row">
+    <footer className="footer">
+      <div className="footer-row">
         <div className="col">
           <section>
             <h5>Информация</h5>
@@ -14,7 +14,7 @@ const Footer = () => {
             </ul>
           </section>
         </div>
-        <div className="col">
+        <div >
           <section>
             <h5>Принимаем к оплате:</h5>
             <div className="footer-pay">
