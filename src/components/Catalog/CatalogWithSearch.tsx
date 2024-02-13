@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import Search from "../Search/Search";
 import Catalog from "./Catalog";
-import { useSelector, useDispatch } from 'react-redux';
 
 
 

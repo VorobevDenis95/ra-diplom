@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchAboutCard = createAsyncThunk(
     'aboutCard/fetchAboutCard',
-    async function(id, {rejectWithValue}) {
+    async function(id:string, {rejectWithValue}) {
       try {
         const response = await fetch(`http://localhost:7070/api/items/${id}`);
         if (!response.ok) {

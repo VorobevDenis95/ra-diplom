@@ -1,22 +1,20 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { changeSearch, fetchSearch, switchSearch } from "../../redux/slice/catalogSlice";
+import { changeSearch, switchSearch } from "../../redux/slice/catalogSlice";
 
 
 const SearchWidget = () => {
-    
     const [isSearch, setSearch] = useState(false);
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
-    const {search} = useSelector(state => state.catalog);
     
-    const handleClickWidget = (e) => {
+    const handleClickWidget = () => {
       isSearch ? setSearch(false) : setSearch(true);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       const input = e.target[0].value;
       if (isSearch && input.trim()) {

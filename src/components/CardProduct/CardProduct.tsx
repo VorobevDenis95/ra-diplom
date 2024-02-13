@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import Sizes from "../Sizes/Sizes";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart } from "../../redux/slice/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 
 export interface CardProductProps {
@@ -28,6 +29,8 @@ export interface CardProductProps {
 
 const CardProduct:FC<CardProductProps> = ({item}) => {
 
+  const navigate = useNavigate();
+    
   const {cardSize} = useSelector(state => state.aboutCard);   
 
   const [quantity, setQuantity] = useState(1);
@@ -58,7 +61,8 @@ const CardProduct:FC<CardProductProps> = ({item}) => {
 
   const addToCart = () => {
     if (!cardSize) return;
-    dispatch(addCart(product));  
+    dispatch(addCart(product));
+    navigate('/cart');  
   }
 
   console.log(item.price)

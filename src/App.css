@@ -63,7 +63,7 @@ h5 {
 .container {
   background-color: #f8f9fa;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1110px;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
@@ -82,8 +82,10 @@ h5 {
 }
 
 .collapse {
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .navbar-nav {
@@ -96,12 +98,12 @@ h5 {
 .header-controls-pics {
   display: flex;
   justify-content: space-between;
-  max-width: 280px;
+  max-width: 360px;
   margin-left: auto;
 }
 .header-controls-pic {
   height: 32px;
-  width: 32px;
+  width: 35px;
   margin: 0 10px;
   
   background-image: url(./img/header-controls-sprite.png);
@@ -198,7 +200,7 @@ h5 {
 .search-active {
   width: 50px;
   position: relative;
-  left: 150px;
+  left: 225px;
 }
 
 .form-search {
@@ -228,7 +230,7 @@ h5 {
 }
 
 .mr-auto {
-  margin-right: 10%;
+  /* margin-right: 10%; */
 }
 /* Banner */
 .banner {

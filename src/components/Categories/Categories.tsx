@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { fetchCategories } from '../../redux/slice/catalogSlice';
 import Category from './Category';
+import { PropsCategory } from './Category';
 
 const Categories = () => {
-    const {categories, idActiveCategory} = useSelector(state => state.catalog);
+    const {categories} = useSelector(state => state.catalog);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -14,7 +15,7 @@ const Categories = () => {
     return (
       
       <ul className="catalog-categories">
-        {categories.map(el => (
+        {categories.map((el: PropsCategory) => (
           <Category key={el.id} item={el} />
         )) }
       </ul> 

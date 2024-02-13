@@ -6,10 +6,6 @@ export interface PropsSizes {
 
 const Sizes = ({list} : PropsSizes) => {
 
-  const handleClick = (id) => {
-    // selected ? setSelected(false) : setSelected(true);
-    console.log(id) 
-  }
 
     return (
     
@@ -17,7 +13,7 @@ const Sizes = ({list} : PropsSizes) => {
         <p>Размеры в наличии:
         {
         list.map(el => (
-            <Size handleClick={handleClick} key={el.size} item={el} />
+            <Size key={el.size} item={el} />
           ))
         }
         </p>

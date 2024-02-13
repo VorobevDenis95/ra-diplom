@@ -27,7 +27,7 @@ const Besselers = () => {
         {status === 'loading' && <Preloader />}
         {error && <h2>{error}</h2>}
         <div className="row">
-        {cards.map((el: PropsProduct) => (
+        {!error && cards.map((el: PropsProduct) => (
           <Product key={el.id} item={el}/>))}
         </div>
        </section>

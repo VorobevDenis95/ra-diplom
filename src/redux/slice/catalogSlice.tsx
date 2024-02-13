@@ -128,11 +128,11 @@ const catalog = createSlice({
 
         // categories
         builder.addCase(fetchCategories.pending, state => {
-            state.status = 'loading';
+            state.status = 'loadingCategories';
             state.error = null;
           })
           builder.addCase(fetchCategories.fulfilled, (state, action) => {
-            state.status = 'resolver',
+            state.status = 'resolverCategories',
             state.categories = action.payload;
             state.categories.unshift(categoryAll);
             // state.categories.forEach(ctg => {
@@ -142,7 +142,7 @@ const catalog = createSlice({
             // })
           })
           builder.addCase(fetchCategories.rejected, (state, action) => {
-            state.status = 'rejected';
+            state.status = 'rejectedCategories';
             state.error = action.payload;
           })
           // catalog
@@ -160,11 +160,11 @@ const catalog = createSlice({
           })
           //add catalog
           builder.addCase(fetchAddCatalog.pending, state => {
-            state.status = 'loading';
+            state.status = 'loadingButton';
             state.error = null;
           })
           builder.addCase(fetchAddCatalog.fulfilled, (state, action) => {
-            state.status = 'resolver';
+            state.status = 'resolverButton';
             const arr = action.payload;
             if (arr.length < 6) state.btnAdd = false;
             arr.forEach(element => state.cards.push(element));

@@ -4,7 +4,7 @@ import aboutCardReducer from './slice/aboutCardSlice';
 import catalogReducer from './slice/catalogSlice';
 import cartReducer from './slice/cartSlice';
 
-export default configureStore({
+export const store = configureStore({
   reducer: {
     topSales: topSalesReducer,
     aboutCard: aboutCardReducer,
@@ -12,3 +12,6 @@ export default configureStore({
     cart: cartReducer,
   },
 });
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

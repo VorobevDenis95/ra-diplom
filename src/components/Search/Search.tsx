@@ -1,29 +1,28 @@
 import { useDispatch, useSelector } from "react-redux";
 import { changeSearch, fetchSearch, switchSearch } from "../../redux/slice/catalogSlice";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const Search = () => {
-    const [inputValue, setInput] = useState('');
     const dispatch = useDispatch();
     const {search, statusSearch} = useSelector(state => state.catalog);
 
     useEffect(() => {
         if (statusSearch) {
-            dispatch(fetchSearch(search)); 
             dispatch(switchSearch(false));
+            dispatch(fetchSearch(search)); 
         }
     }, [statusSearch])
     
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(fetchSearch(search));
     }
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       dispatch(changeSearch(e.target.value))
     }
 
-    const handleBlur = (e) => {
+    const handleBlur = () => {
         dispatch(changeSearch(''));
     }
 

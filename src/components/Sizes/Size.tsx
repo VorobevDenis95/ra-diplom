@@ -14,7 +14,6 @@ export interface PropsSize {
 const Size = ({item}: PropsSize,   ) => {
   const dispatch = useDispatch();
   const {cardSize } = useSelector(state => state.aboutCard)
-  const [selected, setSelected] = useState(false);
 
   const active = item.size === cardSize ? 'selected' : '';
 

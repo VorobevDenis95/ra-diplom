@@ -37,6 +37,7 @@ const cart = createSlice({
           && el.size === action.payload.size));
           if (item) {
             item.quantity = item.quantity + action.payload.quantity;
+            item.total = item.quantity * item.price;
             localStorage.setItem('cards', JSON.stringify(state.cards));
             return;
           }
@@ -44,12 +45,11 @@ const cart = createSlice({
           localStorage.setItem('cards', JSON.stringify(state.cards));
       },
       removeItemCart(state, action) {
-        console.log(action.payload.id)
         const card = state.cards.find((el: PropsCartProduct) => el.id === action.payload.id 
-          && el.size === action.payload.size)
-        console.log(card);
+          && el.size === action.payload.size);
         if (card) {
           card.quantity = card.quantity - 1;
+          card.total = card.quantity * card.price;
           localStorage.setItem('cards', JSON.stringify(state.cards));
           if (card.quantity === 0) {
             state.cards = state.cards.filter((el: PropsCartProduct) => (el.number !== card.number));
@@ -57,8 +57,7 @@ const cart = createSlice({
              state.cards[i].number = i+1; 
             }
             localStorage.setItem('cards', JSON.stringify(state.cards));
-          }
-           
+          }   
         }
       },
       addOrderCart(state) {

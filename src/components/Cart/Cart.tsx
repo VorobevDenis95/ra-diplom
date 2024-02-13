@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart, removeItemCart } from "../../redux/slice/cartSlice";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Preloader from "../Preloader/Preloader";
+import { replaceNumber } from "../../utils";
 
 export interface PropsCartProduct {
   number: number,
@@ -25,11 +26,11 @@ const Cart = () => {
       addOwnerItems();
     }, [cards])
 
-    const changePhoneInput = (e) => {
+    const changePhoneInput = (e: React.ChangeEvent<HTMLInputElement>) => {
       setPhoneInput(e.target.value);
     }
 
-    const changeAddresInput = (e) => {
+    const changeAddresInput = (e: React.ChangeEvent<HTMLInputElement>) => {
       setAddressInput(e.target.value);
     }
 
@@ -63,7 +64,7 @@ const Cart = () => {
       items: orderItems,
     }
 
-    const makeAnOrder = (e) => {
+    const makeAnOrder = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (cards.length !== 0) {
         dispatch(fetchCart(order));
@@ -87,29 +88,33 @@ const Cart = () => {
                 </tr>
               </thead>
                 {cards.map((card: PropsCartProduct )=> (
-                    <tbody key={`${card.id}${card.size}`}>
+                  <tbody key={`${card.id}${card.size}`}>
                       <tr>
                         <td scope="row">{card.number}</td>
                         <td><a href={`/products/${card.id}`}>{card.title}</a></td>
                         <td>{card.size}</td>
                         <td>{card.quantity}</td>
-                        <td>{card.price}</td>
-                        <td>{card.total}</td>
+                        <td>{replaceNumber(card.price)}</td>
+                        <td>{replaceNumber(card.total)}</td>
                         <td><button onClick={() => deleteItem(card)} className="btn btn-outline-danger btn-sm">Удалить</button></td>
                        </tr>
                      </tbody>
                 ))}
                         <tr>
                           <td colspan="5" className="text-right">Общая стоимость:</td>
-                          <td>{total}</td>
+                          <td>{replaceNumber(total)}</td>
                           <td></td>
                           </tr>
             </table>
-          </section>
+                {error && <h2 className="text-center">{error}</h2>}
+                {status === 'resolver' && <h2 className="text-center">Поздравляем! Заказ успешно оформлен!</h2>}
+        </section>
 
+        {
+           status !== 'resolver' &&          
           <section className="order">
             {status === 'loading' && <Preloader/>}
-            {status} {error}
+            
             <h2 className="text-center">Оформить заказ</h2>
             <div className="card-order" >
               <form onSubmit={makeAnOrder} className="card-body">
@@ -129,11 +134,12 @@ const Cart = () => {
                   <input type="checkbox" className="form-check-input" id="agreement" required/>
                   <label className="form-check-label" for="agreement">Согласен с правилами доставки</label>
                 </div>
-                <button type="submit" onSubmit={makeAnOrder} 
+                <button type="submit" 
                 className="btn btn-outline-secondary">Оформить</button>
               </form>
             </div>
           </section>
+        }
           </>
     )
 }
