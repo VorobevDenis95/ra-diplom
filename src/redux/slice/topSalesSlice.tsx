@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchTopSales = createAsyncThunk(
     'topSales/fetchTopSales',
-    async function(_, {rejectWithValue}) {
+    async function(_, thunkAPI) {
       try {
         const response = await fetch('http://localhost:7070/api/top-sales');
         if (!response.ok) {
@@ -11,7 +11,9 @@ export const fetchTopSales = createAsyncThunk(
         const data = await response.json();
         return data;
       } catch (error) {
-        return rejectWithValue(error.message)
+        if (error instanceof Error)
+        return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue('Unknown error');
       }
     }
 )
@@ -35,9 +37,9 @@ const topSales = createSlice({
           state.status = 'resolver',
           state.cards = action.payload;
         })
-        builder.addCase(fetchTopSales.rejected, (state, action) => {
+        builder.addCase(fetchTopSales.rejected, (state) => {
           state.status = 'rejected';
-          state.error = action.payload;
+          state.error = 'rejected';
         })
     }
 });

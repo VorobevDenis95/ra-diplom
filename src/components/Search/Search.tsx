@@ -1,10 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../redux/redux-hook";
 import { changeSearch, fetchSearch, switchSearch } from "../../redux/slice/catalogSlice";
 import { useEffect } from "react";
 
 const Search = () => {
-    const dispatch = useDispatch();
-    const {search, statusSearch} = useSelector(state => state.catalog);
+    const dispatch = useAppDispatch();
+    const {search, statusSearch} = useAppSelector(state => state.catalog);
 
     useEffect(() => {
         if (statusSearch) {

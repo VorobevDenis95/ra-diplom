@@ -1,13 +1,12 @@
-import {useDispatch, useSelector} from 'react-redux';
+import {useAppDispatch, useAppSelector} from '../../redux/redux-hook';
 import { fetchAddCatalog } from '../../redux/slice/catalogSlice';
 import Preloader from '../Preloader/Preloader';
 
 const BtnAdd = () => {
-    const dispatch = useDispatch();
-    const {status} = useSelector(state => state.catalog);
-    const {cards, idActiveCategory} = useSelector(state => state.catalog);
+    const dispatch = useAppDispatch();
+    const {status} = useAppSelector(state => state.catalog);
+    const {cards, idActiveCategory} = useAppSelector(state => state.catalog);
     
-
     return (
         <>
             {status === 'loadingButton' && <Preloader />}

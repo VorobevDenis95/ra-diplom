@@ -8,13 +8,13 @@ import AboutCard from '../components/CardProduct/AboutCard';
 import Main from '../components/Main/Main';
 import { CatalogWithSearch } from '../components/Catalog/CatalogWithSearch';
 import Cart from '../components/Cart/Cart';
-
+import { FullErrorPage } from '../components/HOC/FullErrorPage';
 
 export const router = createBrowserRouter([
     {
       path: '/',
       element: <Root />,
-      // errorElement: <FullErrorPage />,
+      errorElement: <FullErrorPage />,
       children: [
         {
           path: '/',

@@ -1,37 +1,17 @@
 import { FC, useState } from "react";
 import Sizes from "../Sizes/Sizes";
-import { useDispatch, useSelector } from "react-redux";
 import { addCart } from "../../redux/slice/cartSlice";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/redux-hook";
+import { CardProductPropsItem } from "../../types/CardProductInterface";
 
 
-export interface CardProductProps {
-    item: {
-        id: number,
-        category: number,
-        title: string,
-        images: string[],
-        sku: string,
-        manufacturer: string,
-        color: string,
-        material: string,
-        reason: string,
-        season: string,
-        heelsiz: string,
-        price: number,
-        oldPrice: number,
-        sizes: {
-            size: string,
-            available: boolean,
-        }[],
-    }
-}
-
-const CardProduct:FC<CardProductProps> = ({item}) => {
+const CardProduct:FC<CardProductPropsItem> = ({item}) => {
 
   const navigate = useNavigate();
     
-  const {cardSize} = useSelector(state => state.aboutCard);   
+  const {cardSize} = useAppSelector(state => state.aboutCard);   
+  const {cards} = useAppSelector(state => state.cart)
 
   const [quantity, setQuantity] = useState(1);
 
@@ -45,9 +25,8 @@ const CardProduct:FC<CardProductProps> = ({item}) => {
     quantity > 1 ?setQuantity(quantity - 1) : null
   }
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const {cards} = useSelector(state => state.cart)
 
   const product = {
     number: cards.length + 1,

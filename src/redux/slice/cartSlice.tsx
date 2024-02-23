@@ -3,7 +3,7 @@ import { PropsCartProduct } from '../../components/Cart/Cart';
 
 export const fetchCart = createAsyncThunk(
     'cart/fetchCart',
-    async function(order, {rejectWithValue}) {
+    async function(order, thunkAPI) {
       console.log(JSON.stringify(order))
       try {
         const response = await fetch('http://localhost:7070/api/order', {
@@ -17,7 +17,9 @@ export const fetchCart = createAsyncThunk(
         }
 
       } catch (error) {
-        return rejectWithValue(error.message)
+        if (error instanceof(Error))
+        return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue('Unknown Error');
       }
     }
 )

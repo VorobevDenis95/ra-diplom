@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../redux/redux-hook";
 import { fetchCart, removeItemCart } from "../../redux/slice/cartSlice";
 import React, { useEffect, useState } from "react";
 import Preloader from "../Preloader/Preloader";
@@ -15,8 +15,8 @@ export interface PropsCartProduct {
 }
 
 const Cart = () => {
-    const dispatch = useDispatch();
-    const { cards, status, error } = useSelector(state => state.cart);    
+    const dispatch = useAppDispatch();
+    const { cards, status, error } = useAppSelector(state => state.cart);    
     const [orderItems, setOrderItems] = useState([]);
 
     const [phoneInput, setPhoneInput] = useState('');
@@ -101,7 +101,7 @@ const Cart = () => {
                      </tbody>
                 ))}
                         <tr>
-                          <td colspan="5" className="text-right">Общая стоимость:</td>
+                          <td colSpan={5} className="text-right">Общая стоимость:</td>
                           <td>{replaceNumber(total)}</td>
                           <td></td>
                           </tr>
@@ -119,20 +119,20 @@ const Cart = () => {
             <div className="card-order" >
               <form onSubmit={makeAnOrder} className="card-body">
                 <div className="form-group">
-                  <label className='phone__form-group'for="phone">Телефон</label>
+                  <label className='phone__form-group'htmlFor="phone">Телефон</label>
                   <input type='text' className="form-control" 
                   onChange={changePhoneInput}
                   id="phone" placeholder="Ваш телефон" required/>
                 </div>
                 <div className="form-group">
-                  <label className='address__form-group' for="address">Адрес доставки</label>
+                  <label className='address__form-group' htmlFor="address">Адрес доставки</label>
                   <input type='text' className="form-control" 
                   onChange={changeAddresInput}
                   id="address" placeholder="Адрес доставки" required/>
                 </div>
                 <div className="form-group form-check">
                   <input type="checkbox" className="form-check-input" id="agreement" required/>
-                  <label className="form-check-label" for="agreement">Согласен с правилами доставки</label>
+                  <label className="form-check-label" htmlFor="agreement">Согласен с правилами доставки</label>
                 </div>
                 <button type="submit" 
                 className="btn btn-outline-secondary">Оформить</button>

@@ -1,18 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../redux/redux-hook";
 import { switchCategory } from "../../redux/slice/catalogSlice";
+import { PropsCategoryItem } from "../../types/CategoryInterface";
 
 
-export interface PropsCategory {
-    item: {
-        id: number,
-        title: string,
-        selected: boolean,
-    }
-}
-
-const Category = ({item}: PropsCategory) => {
-  const {idActiveCategory} = useSelector(state => state.catalog);
-  const dispatch = useDispatch();
+const Category = ({item}: PropsCategoryItem) => {
+  const {idActiveCategory} = useAppSelector(state => state.catalog);
+  const dispatch = useAppDispatch();
 
   // const handleClick = (id: number) => {
   //   console.log(id)

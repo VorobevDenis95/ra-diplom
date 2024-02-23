@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchCatalog = createAsyncThunk(
     'catalog/fetchCatalog',
-    async function(id, {rejectWithValue}) {
+    async function(id, thunkAPI) {
       try {
         let response;
         if (id === 11) {
@@ -16,7 +16,9 @@ export const fetchCatalog = createAsyncThunk(
         const data = await response.json();
         return data;
       } catch (error) {
-        return rejectWithValue(error.message)
+        if (error instanceof Error) 
+        return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.fulfillWithValue('Unknown Error');
       }
     }
 )

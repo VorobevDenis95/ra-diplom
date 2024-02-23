@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useAppDispatch, useAppSelector} from '../../redux/redux-hook';
 import { fetchCategories } from '../../redux/slice/catalogSlice';
 import Category from './Category';
-import { PropsCategory } from './Category';
+import { PropsCategory } from '../../types/CategoryInterface';
+
 
 const Categories = () => {
-    const {categories} = useSelector(state => state.catalog);
-    const dispatch = useDispatch();
+    const {categories} = useAppSelector(state => state.catalog);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(fetchCategories())

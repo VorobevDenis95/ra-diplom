@@ -1,18 +1,19 @@
 import { useEffect } from "react";
-import { PropsProduct } from "../Product/Product.tsx";
 import Product from "../Product/Product.tsx";
-import {useDispatch, useSelector} from 'react-redux';
 import { fetchTopSales } from "../../redux/slice/topSalesSlice.tsx";
 import Preloader from "../Preloader/Preloader.tsx";
+import { PropsProduct} from "../../types/ProductInterface.ts";
+import { useAppDispatch, useAppSelector } from "../../redux/redux-hook.ts";
+
 
 const Besselers = () => {
   // const [isLoading, setLoading] = useState(false);
   // const [showComponent, setShowComponent] = useState(true);
   // const [list, setList] = useState<Array<PropsProduct>>([]);
 
-  const dispath = useDispatch();
+  const dispath = useAppDispatch();
 
-  const {cards, error, status} = useSelector(state => state.topSales);
+  const {cards, error, status} = useAppSelector(state => state.topSales);
   
 
   useEffect(() => {

@@ -1,19 +1,10 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { switchSize } from "../../redux/slice/aboutCardSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/redux-hook";
+import { PropsSizeItem } from "../../types/SizeInterface";
 
-export interface PropsSize {
-  item: {
-    size: string,
-    available: boolean,
-  }
-}
-
-
-
-const Size = ({item}: PropsSize,   ) => {
-  const dispatch = useDispatch();
-  const {cardSize } = useSelector(state => state.aboutCard)
+const Size = ({item}: PropsSizeItem,   ) => {
+  const dispatch = useAppDispatch();
+  const {cardSize } = useAppSelector(state => state.aboutCard)
 
   const active = item.size === cardSize ? 'selected' : '';
 
@@ -23,7 +14,6 @@ const Size = ({item}: PropsSize,   ) => {
     dispatch(switchSize(id));
     // selected ? setSelected(false) : setSelected(true);
   }
-
 
 
   return (

@@ -1,11 +1,11 @@
 import headerLogo from '../../img/header-logo.png';
 import { Link, NavLink } from 'react-router-dom';
 import SearchWidget from '../SearchWidget/SearchWidget';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../redux/redux-hook';
 
 const Header = () => {
 
-  const {cards} = useSelector(state => state.cart)
+  const {cards} = useAppSelector(state => state.cart)
 
     return (
         <header className="container">

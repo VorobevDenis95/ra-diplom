@@ -1,5 +1,5 @@
 import { ReactNode, useEffect } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useAppDispatch, useAppSelector} from '../../redux/redux-hook';
 import { fetchCatalog, fetchSearch } from '../../redux/slice/catalogSlice';
 import Categories from '../Categories/Categories';
 import Product from '../Product/Product';
@@ -13,11 +13,11 @@ interface PropsCatalog {
 
 
 const Catalog = ({children}:PropsCatalog) => {
-    const {cards, btnAdd, idActiveCategory, search, error} = useSelector(state => state.catalog);
-    const dispatch = useDispatch();
+    const {cards, btnAdd, idActiveCategory, search, error} = useAppSelector(state => state.catalog);
+    const dispatch = useAppDispatch();
     const location = useLocation()
 
-    const {status} = useSelector(state => state.catalog);
+    const {status} = useAppSelector(state => state.catalog);
 
     useEffect(() => {
         dispatch(fetchCatalog(idActiveCategory))
