@@ -1,4 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { StoreAboutCard } from '../../types/storeInterface';import { CardProductProps } from '../../types/CardProductInterface';
+
 
 export const fetchAboutCard = createAsyncThunk(
     'aboutCard/fetchAboutCard',
@@ -18,14 +20,16 @@ export const fetchAboutCard = createAsyncThunk(
     }
 )
 
+const initialState : StoreAboutCard = {
+  card: [],
+  cardSize: '',
+  status: null,
+  error: null
+}
+
 const aboutCard = createSlice({
     name: 'aboutCard',
-    initialState: {
-        card: [],
-        cardSize: '',
-        status: null,
-        error: null,
-    },
+    initialState,
     reducers: {
       switchSize(state, action) {
         state.cardSize = action.payload;
@@ -36,7 +40,7 @@ const aboutCard = createSlice({
           state.status = 'loading';
           state.error = null;
         })
-        builder.addCase(fetchAboutCard.fulfilled, (state, action) => {
+        builder.addCase(fetchAboutCard.fulfilled, (state, action: PayloadAction<CardProductProps>) => {
           state.status = 'resolved',
           state.card = [];
           state.card.push(action.payload);
@@ -45,7 +49,7 @@ const aboutCard = createSlice({
         })
         builder.addCase(fetchAboutCard.rejected, (state, action) => {
           state.status = 'rejected';
-          state.error = action.payload;
+          state.error = action.payload as string;
         })
     }
 });

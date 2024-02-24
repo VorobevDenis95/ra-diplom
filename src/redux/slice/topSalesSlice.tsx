@@ -1,4 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { StoreTopSales } from '../../types/storeInterface';
+import { PropsProduct } from '../../types/ProductInterface';
 
 export const fetchTopSales = createAsyncThunk(
     'topSales/fetchTopSales',
@@ -18,13 +20,15 @@ export const fetchTopSales = createAsyncThunk(
     }
 )
 
+const initialState : StoreTopSales = {
+  cards: [],
+  status: null,
+  error: null,
+} 
+
 const topSales = createSlice({
     name: 'topSales',
-    initialState: {
-        cards: [],
-        status: null,
-        error: null,
-    },
+    initialState,
     reducers: {
       
     },
@@ -33,7 +37,7 @@ const topSales = createSlice({
           state.status = 'loading';
           state.error = null;
         })
-        builder.addCase(fetchTopSales.fulfilled, (state, action) => {
+        builder.addCase(fetchTopSales.fulfilled, (state, action: PayloadAction<PropsProduct[]> ) => {
           state.status = 'resolver',
           state.cards = action.payload;
         })

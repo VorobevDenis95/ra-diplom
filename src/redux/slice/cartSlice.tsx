@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { PropsCartProduct } from '../../components/Cart/Cart';
+import { CartItem, Order, PropsCartProduct } from '../../types/ProductInterface';
+import { StoreCart } from '../../types/storeInterface';
 
 export const fetchCart = createAsyncThunk(
     'cart/fetchCart',
-    async function(order, thunkAPI) {
+    async function(order: Order, thunkAPI) {
       console.log(JSON.stringify(order))
       try {
         const response = await fetch('http://localhost:7070/api/order', {
@@ -24,22 +25,25 @@ export const fetchCart = createAsyncThunk(
     }
 )
 
+const initialState: StoreCart = {
+  cards: JSON.parse(localStorage.getItem('cards')) || [],
+  status: null,
+  error: null,
+  orderItems: [],
+  // total: cards.reduce(acc, cur) => (acc + Number(cur.total), 0)
+}
+
+
 const cart = createSlice({
     name: 'cart',
-    initialState: {
-        cards: JSON.parse(localStorage.getItem('cards')) || [],
-        status: null,
-        error: null,
-        orderItems: [],
-        // total: cards.reduce(acc, cur) => (acc + Number(cur.total), 0)
-    },
+    initialState,
     reducers: {
       addCart(state, action) {
         const item = state.cards.find((el : PropsCartProduct) => (el.id === action.payload.id 
           && el.size === action.payload.size));
           if (item) {
             item.quantity = item.quantity + action.payload.quantity;
-            item.total = item.quantity * item.price;
+            item.total = String(item.quantity * Number(item.price));
             localStorage.setItem('cards', JSON.stringify(state.cards));
             return;
           }
@@ -51,7 +55,7 @@ const cart = createSlice({
           && el.size === action.payload.size);
         if (card) {
           card.quantity = card.quantity - 1;
-          card.total = card.quantity * card.price;
+          card.total = String(card.quantity * Number(card.price));
           localStorage.setItem('cards', JSON.stringify(state.cards));
           if (card.quantity === 0) {
             state.cards = state.cards.filter((el: PropsCartProduct) => (el.number !== card.number));
@@ -65,7 +69,7 @@ const cart = createSlice({
       addOrderCart(state) {
         state.orderItems = [];
         state.cards.forEach((card: PropsCartProduct) => {
-          const item = {
+          const item: CartItem = {
             id: Number(card.id),
             price: Number(card.price),
             count: Number(card.quantity),
@@ -79,14 +83,14 @@ const cart = createSlice({
           state.status = 'loading';
           state.error = null;
         })
-        builder.addCase(fetchCart.fulfilled, (state, action) => {
+        builder.addCase(fetchCart.fulfilled, (state) => {
           state.status = 'resolver';
           state.cards = [];
           localStorage.setItem('cards', JSON.stringify(state.cards));
         })
         builder.addCase(fetchCart.rejected, (state, action) => {
           state.status = 'rejected';
-          state.error = action.payload;
+          state.error = action.payload as string;
         })
     }
 });

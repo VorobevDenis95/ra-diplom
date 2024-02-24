@@ -3,21 +3,12 @@ import { fetchCart, removeItemCart } from "../../redux/slice/cartSlice";
 import React, { useEffect, useState } from "react";
 import Preloader from "../Preloader/Preloader";
 import { replaceNumber } from "../../utils";
-
-export interface PropsCartProduct {
-  number: number,
-  id: string,
-  title: string,
-  size: string,
-  quantity: number,
-  price: string,
-  total: string,
-}
+import { CartItem, Order, PropsCartProduct } from "../../types/ProductInterface";
 
 const Cart = () => {
     const dispatch = useAppDispatch();
     const { cards, status, error } = useAppSelector(state => state.cart);    
-    const [orderItems, setOrderItems] = useState([]);
+    const [orderItems, setOrderItems] = useState<Array<CartItem>>([]);
 
     const [phoneInput, setPhoneInput] = useState('');
     const [addressInput, setAddressInput] = useState('');
@@ -44,7 +35,7 @@ const Cart = () => {
 
     const addOwnerItems = () => {
       console.log(1);
-      const arr: ((prevState: never[]) => never[]) | { id: number; price: number; count: number; }[] = [];
+      const arr :CartItem[] = [];
       cards.map((card: PropsCartProduct) => {
         const item = {
           id: Number(card.id),
@@ -56,7 +47,7 @@ const Cart = () => {
       setOrderItems(arr);
     }
 
-    const order = {
+    const order: Order = {
       owner: {
         phone: phoneInput, 
         address: addressInput,
@@ -102,7 +93,7 @@ const Cart = () => {
                 ))}
                         <tr>
                           <td colSpan={5} className="text-right">Общая стоимость:</td>
-                          <td>{replaceNumber(total)}</td>
+                          <td>{replaceNumber(String(total))}</td>
                           <td></td>
                           </tr>
             </table>

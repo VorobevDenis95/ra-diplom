@@ -14,18 +14,11 @@ const Categories = () => {
     }, [dispatch]);
 
     return (
-      
       <ul className="catalog-categories">
         {categories.map((el: PropsCategory) => (
           <Category key={el.id} item={el} />
         )) }
       </ul> 
-      
-
-
-
-  
-            
   )
 }
 
