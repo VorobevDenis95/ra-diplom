@@ -26,7 +26,8 @@ export const fetchCart = createAsyncThunk(
 )
 
 const initialState: StoreCart = {
-  cards: JSON.parse(localStorage.getItem('cards')) || [],
+  // cards: JSON.parse(localStorage.getItem('cards')) || [],
+  cards: [],
   status: null,
   error: null,
   orderItems: [],
@@ -44,11 +45,11 @@ const cart = createSlice({
           if (item) {
             item.quantity = item.quantity + action.payload.quantity;
             item.total = String(item.quantity * Number(item.price));
-            localStorage.setItem('cards', JSON.stringify(state.cards));
+            // localStorage.setItem('cards', JSON.stringify(state.cards));
             return;
           }
           state.cards.push(action.payload);
-          localStorage.setItem('cards', JSON.stringify(state.cards));
+          // localStorage.setItem('cards', JSON.stringify(state.cards));
       },
       removeItemCart(state, action) {
         const card = state.cards.find((el: PropsCartProduct) => el.id === action.payload.id 
@@ -56,13 +57,13 @@ const cart = createSlice({
         if (card) {
           card.quantity = card.quantity - 1;
           card.total = String(card.quantity * Number(card.price));
-          localStorage.setItem('cards', JSON.stringify(state.cards));
+          // localStorage.setItem('cards', JSON.stringify(state.cards));
           if (card.quantity === 0) {
             state.cards = state.cards.filter((el: PropsCartProduct) => (el.number !== card.number));
             for (let i = 0; i < state.cards.length; i++) {
              state.cards[i].number = i+1; 
             }
-            localStorage.setItem('cards', JSON.stringify(state.cards));
+            // localStorage.setItem('cards', JSON.stringify(state.cards));
           }   
         }
       },
@@ -86,7 +87,7 @@ const cart = createSlice({
         builder.addCase(fetchCart.fulfilled, (state) => {
           state.status = 'resolver';
           state.cards = [];
-          localStorage.setItem('cards', JSON.stringify(state.cards));
+          // localStorage.setItem('cards', JSON.stringify(state.cards));
         })
         builder.addCase(fetchCart.rejected, (state, action) => {
           state.status = 'rejected';

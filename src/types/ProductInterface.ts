@@ -44,4 +44,4 @@ interface Order {
 }
 
 export type {PropsProduct, PropsProductItem, AddProduct,
-  PropsCartProduct, PropsCartProductItem, CartItem}
+  PropsCartProduct, PropsCartProductItem, CartItem, Order}
