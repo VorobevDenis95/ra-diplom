@@ -4,7 +4,7 @@ import Footer from "../Footer/Footer";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import Banner from "../Banner/Banner";
 
-const withNewPage = (Component ) => {
+const withNewPage = (Component: () => JSX.Element ) => {
   return class extends React.Component{
     render(): React.ReactNode {
         return (
